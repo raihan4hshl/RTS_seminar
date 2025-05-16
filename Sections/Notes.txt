@@ -1,0 +1,7 @@
+Use diagrams liberally: task timelines, resource access tables, state transitions.
+
+Add a short case study from RTOS or embedded project (like FreeRTOS with mutex).
+
+Keep a technical glossary (blocking, jitter, latency, etc.).
+
+Mention real-time scheduling integration (EDF, RMS + protocol).
