@@ -1,0 +1,13 @@
+\begin{thebibliography}{1}
+
+\bibitem{JiacunWang.2017}
+{Jiacun Wang}, {\em Real-Time Embedded Systems}.
+\newblock Quantitative Software Engineering Series, 111 River Street, Hoboken, NJ 07030, USA: {John Wiley {\&} Sons, Inc.}, 2017.
+
+\bibitem{dosSantos.2023}
+L.~M. {dos Santos}, G.~Gracioli, T.~Kloda, and M.~Caccamo, ``Supporting single and multi-core resource access protocols on object-oriented rtoses,'' vol.~27, pp.~31--50, 2023.
+
+\bibitem{UniversityofGlasgow.}
+``Resource access control in real-time systems: Advanced operating systems (m).''
+
+\end{thebibliography}

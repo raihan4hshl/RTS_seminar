@@ -1,18 +1,2 @@
 \section{Comparison of Resource Sharing Protocols}
 
-\begin{table}[h!]
-\centering
-\caption{Comparison of Resource Access Protocols}
-\begin{tabular}{|l|c|c|c|c|}
-\hline
-\textbf{Protocol} & \textbf{Blocking} & \textbf{Deadlock} & \textbf{Priority Changes} & \textbf{Suitable For} \\
-\hline
-Priority Inheritance (PIP) & Unbounded & Possible & Yes & Small RTOS \\
-\hline
-Priority Ceiling (PCP) & Bounded & Avoided & Yes & General RTOS \\
-\hline
-Stack Resource Policy (SRP) & Bounded & Avoided & No & EDF-based systems \\
-\hline
-\end{tabular}
-\label{tab:protocol_comparison}
-\end{table}

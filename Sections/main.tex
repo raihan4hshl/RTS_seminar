@@ -1,14 +1,30 @@
-\documentclass{article}
-\usepackage{graphicx} % Required for inserting images
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{fontspec}
 
-\title{hw sw codesign}
+\title{Resource Access Protocols in Real-Time Embedded Systems}
 \author{Raihan Uddin}
-\date{May 2025}
+\date{\today}
 
 \begin{document}
 
 \maketitle
+\tableofcontents
+\newpage
 
-\section{Introduction}
+% Include sections
+\input{Introduction}
+
+\newpage
+\bibliographystyle{ieeetr}  % Change to apa, plain, acm, etc. if required
+\bibliography{bibliography_RTS}  % Your .bib file (no .bib extension)
 
 \end{document}
