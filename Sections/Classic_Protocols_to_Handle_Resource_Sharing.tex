@@ -1,28 +1,30 @@
-\documentclass{article} 
+% \documentclass{article} 
 
-\begin{document} 
+% \begin{document} 
+% \section{Classic Protocols to Handle Resource Sharing}
+% \subsection{Priority Inheritance Protocol (PIP)}
+%     \begin{itemize}
+%         \item Idea: Low-priority task inherits the priority of blocked high-priority task.
+%         \item Pro: Simple, reduces blocking.
+%         \item Con: Can cause chained blocking.
+%         \item Diagram: Show a task getting temporary high priority.
+%     \end{itemize}
+% \subsection{Priority Ceiling Protocol (PCP)}
+%     \begin{itemize}
+%         \item Each resource has a ceiling priority.
+%         \item Tasks must lock resources carefully based on ceilings.
+%         \item Prevents deadlocks.
+%         \item Pro: Bounded blocking.
+%         \item Include a resource-access matrix or state machine.
+%     \end{itemize}
+% \subsection{Stack Resource Policy (SRP)}
+%     \begin{itemize}
+%         \item Preemption controlled based on the resource ceiling.
+%         \item Works with EDF scheduling.
+%         \item Prevents deadlocks.
+%         \item Pros: Avoids runtime priority changes.
+%         \item Used in Real-Time Java, OSEK, and automotive systems.
+%     \end{itemize}
+% \end{document}
 \section{Classic Protocols to Handle Resource Sharing}
-\subsection{Priority Inheritance Protocol (PIP)}
-    \begin{itemize}
-        \item Idea: Low-priority task inherits the priority of blocked high-priority task.
-        \item Pro: Simple, reduces blocking.
-        \item Con: Can cause chained blocking.
-        \item Diagram: Show a task getting temporary high priority.
-    \end{itemize}
-\subsection{Priority Ceiling Protocol (PCP)}
-    \begin{itemize}
-        \item Each resource has a ceiling priority.
-        \item Tasks must lock resources carefully based on ceilings.
-        \item Prevents deadlocks.
-        \item Pro: Bounded blocking.
-        \item Include a resource-access matrix or state machine.
-    \end{itemize}
-\subsection{Stack Resource Policy (SRP)}
-    \begin{itemize}
-        \item Preemption controlled based on the resource ceiling.
-        \item Works with EDF scheduling.
-        \item Prevents deadlocks.
-        \item Pros: Avoids runtime priority changes.
-        \item Used in Real-Time Java, OSEK, and automotive systems.
-    \end{itemize}
-\end{document}
+It is stated by~\cite{Buttazzo.2024} that the first four protocols, which are mentioned above, have been developed fixed priority assignments but some of them have also been extended under EDF; whereas, the last one is applicale for both fixed and dynamic priority assignments.
