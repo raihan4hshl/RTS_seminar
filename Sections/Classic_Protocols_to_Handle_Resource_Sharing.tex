@@ -1,30 +1,61 @@
-% \documentclass{article} 
-
-% \begin{document} 
-% \section{Classic Protocols to Handle Resource Sharing}
-% \subsection{Priority Inheritance Protocol (PIP)}
-%     \begin{itemize}
-%         \item Idea: Low-priority task inherits the priority of blocked high-priority task.
-%         \item Pro: Simple, reduces blocking.
-%         \item Con: Can cause chained blocking.
-%         \item Diagram: Show a task getting temporary high priority.
-%     \end{itemize}
-% \subsection{Priority Ceiling Protocol (PCP)}
-%     \begin{itemize}
-%         \item Each resource has a ceiling priority.
-%         \item Tasks must lock resources carefully based on ceilings.
-%         \item Prevents deadlocks.
-%         \item Pro: Bounded blocking.
-%         \item Include a resource-access matrix or state machine.
-%     \end{itemize}
-% \subsection{Stack Resource Policy (SRP)}
-%     \begin{itemize}
-%         \item Preemption controlled based on the resource ceiling.
-%         \item Works with EDF scheduling.
-%         \item Prevents deadlocks.
-%         \item Pros: Avoids runtime priority changes.
-%         \item Used in Real-Time Java, OSEK, and automotive systems.
-%     \end{itemize}
-% \end{document}
 \section{Classic Protocols to Handle Resource Sharing}
 It is stated by~\cite{Buttazzo.2024} that the first four protocols, which are mentioned above, have been developed under the fixed priority assignments but some of them have also been extended under the EDF; whereas, the last one is applicale for both fixed and dynamic priority assignments.
+\subsection{Non-Preemptive Protocol (NPP)}
+In non-preemptive scheduling, once a task starts executing, it cannot be interrupted until it completes or voluntarily yields the CPU. This simplifies resource access since tasks complete before others interfere.
+\begin{itemize}
+    \item Benefits: 
+    \begin{itemize}
+        \item No priority inversion by design.
+        \item No need for locks in many simple systems.
+    \end{itemize}
+    \item Drawbacks:
+    \begin{itemize}
+        \item High-priority tasks may suffer long blocking times (poor responsiveness)
+        \item Not scalable for complex systems with mixed criticality
+    \end{itemize}
+\end{itemize}
+\subsection{Priority Inheritance Protocol (PIP)}
+The Priority Inheritance Protocol (PIP) is a classic approach to reduce priority inversion in systems where tasks share mutually exclusive resources (e.g., locks, semaphores). When a low-priority task holds a resource required by a higher-priority task, the low-priority task temporarily inherits the higher priority. This prevents it from being preempted by intermediate-priority tasks, allowing it to finish quickly and release the resource.
+\begin{itemize}
+    \item Benefits: 
+    \begin{itemize}
+        \item Reduces unbounded priority inversion
+        \item Easy to implement in most RTOS
+    \end{itemize}
+    \item Drawbacks:
+    \begin{itemize}
+        \item Can cause deadlocks if resource ordering is not handled carefully
+        \item Inheritance must be handled recursively for nested resource requests
+    \end{itemize}
+\end{itemize}
+\subsection{Priority Ceiling Protocol (PCP)}
+The Priority Ceiling Protocol (PCP) assigns a ceiling priority to each shared resource — equal to the highest priority of any task that might access it.
+A task can only lock a resource if its priority is higher than the ceiling of any currently locked resource by another task.
+When a task accesses a resource, it inherits the ceiling priority, blocking any higher-priority tasks that could interfere.
+\begin{itemize}
+    \item Benefits: 
+    \begin{itemize}
+        \item Prevents both priority inversion and deadlocks
+        \item Ensures bounded blocking time
+    \end{itemize}
+    \item Drawbacks:
+    \begin{itemize}
+        \item Requires knowledge of all task/resource relationships at design time
+        \item Can be overly restrictive in dynamic systems
+    \end{itemize}
+\end{itemize}
+\subsection{Stack Resource Policy (SRP)}
+The Stack Resource Policy (SRP) is used with preemptive scheduling (like EDF or RM) and assumes a single stack for all tasks.
+Each resource has a ceiling, and a task can only preempt the current task if its priority is higher than the system ceiling (i.e., the ceiling of all currently locked resources).
+\begin{itemize}
+    \item Benefits: 
+    \begin{itemize}
+        \item No runtime deadlocks
+        \item Bounded blocking time
+    \end{itemize}
+    \item Drawbacks:
+    \begin{itemize}
+        \item Works best with static task sets
+        \item More complex to analyze than PIP
+    \end{itemize}
+\end{itemize}
