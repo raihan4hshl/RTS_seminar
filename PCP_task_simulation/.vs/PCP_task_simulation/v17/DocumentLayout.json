@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\exone\\Documents\\GitHub\\RTS_seminar\\PCP_task_simulation\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8E08854F-829C-49E4-9879-F2AEA4FBFB98}|PCP_task_simulation\\PCP_task_simulation.vcxproj|C:\\Users\\exone\\Documents\\GitHub\\RTS_seminar\\PCP_task_simulation\\PCP_task_simulation\\PCP_task_simulation.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{8E08854F-829C-49E4-9879-F2AEA4FBFB98}|PCP_task_simulation\\PCP_task_simulation.vcxproj|solutionrelative:PCP_task_simulation\\PCP_task_simulation.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PCP_task_simulation.cpp",
+              "DocumentMoniker": "C:\\Users\\exone\\Documents\\GitHub\\RTS_seminar\\PCP_task_simulation\\PCP_task_simulation\\PCP_task_simulation.cpp",
+              "RelativeDocumentMoniker": "PCP_task_simulation\\PCP_task_simulation.cpp",
+              "ToolTip": "C:\\Users\\exone\\Documents\\GitHub\\RTS_seminar\\PCP_task_simulation\\PCP_task_simulation\\PCP_task_simulation.cpp",
+              "RelativeToolTip": "PCP_task_simulation\\PCP_task_simulation.cpp",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABUAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-06-21T15:01:25.993Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

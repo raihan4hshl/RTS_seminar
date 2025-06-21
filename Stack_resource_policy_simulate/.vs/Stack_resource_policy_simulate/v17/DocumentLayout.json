@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\exone\\Documents\\GitHub\\RTS_seminar\\Stack_resource_policy_simulate\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{03AD618B-98F3-4DB3-B510-07DBD99463EC}|Stack_resource_policy_simulate\\Stack_resource_policy_simulate.vcxproj|C:\\Users\\exone\\Documents\\GitHub\\RTS_seminar\\Stack_resource_policy_simulate\\Stack_resource_policy_simulate\\Stack_resource_policy_simulate.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{03AD618B-98F3-4DB3-B510-07DBD99463EC}|Stack_resource_policy_simulate\\Stack_resource_policy_simulate.vcxproj|solutionrelative:Stack_resource_policy_simulate\\Stack_resource_policy_simulate.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Stack_resource_policy_simulate.cpp",
+              "DocumentMoniker": "C:\\Users\\exone\\Documents\\GitHub\\RTS_seminar\\Stack_resource_policy_simulate\\Stack_resource_policy_simulate\\Stack_resource_policy_simulate.cpp",
+              "RelativeDocumentMoniker": "Stack_resource_policy_simulate\\Stack_resource_policy_simulate.cpp",
+              "ToolTip": "C:\\Users\\exone\\Documents\\GitHub\\RTS_seminar\\Stack_resource_policy_simulate\\Stack_resource_policy_simulate\\Stack_resource_policy_simulate.cpp",
+              "RelativeToolTip": "Stack_resource_policy_simulate\\Stack_resource_policy_simulate.cpp",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAAAwAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-06-21T17:02:11.726Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

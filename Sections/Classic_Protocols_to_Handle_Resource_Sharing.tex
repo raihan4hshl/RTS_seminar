@@ -1,21 +1,47 @@
 \section{Classic Protocols to Handle Resource Sharing}
 It is stated by~\cite{Buttazzo.2024} that the first four protocols, which are mentioned above, have been developed under the fixed priority assignments but some of them have also been extended under the EDF; whereas, the last one is applicale for both fixed and dynamic priority assignments.
 \subsection{Non-Preemptive Protocol (NPP)}
-In non-preemptive scheduling, once a task starts executing, it cannot be interrupted until it completes or voluntarily yields the CPU. This simplifies resource access since tasks complete before others interfere.
+A simple design to stop unbounded priority inversion, is the implementation of non-preemptive scheduling. Here, the key idea is to make all critical sections nonpreemptable~\cite{JiacunWang.2017}. A task, which locks the resource gets the highest priority among all the other tasks. After executing at its critical section, the task unlocks the resource. As no task is allowed t o be preempted while it is holding a resource, this protocol is known as nonpreemptive critical section~\cite{JiacunWang.2017}.  In non-preemptive scheduling, once a task starts executing, it cannot be interrupted until it completes or voluntarily yields the CPU. This simplifies resource access since tasks complete before others interfere.
 \begin{itemize}
     \item Benefits: 
     \begin{itemize}
-        \item No priority inversion by design.
-        \item No need for locks in many simple systems.
+        \item No unbounded priority inversion by design.
+        \item Simple and easy to implement~\cite{JiacunWang.2017}.
+        \item No prior knowledge of resource requirements is needed.
+        \item Circular waiting is avoided~\cite{JiacunWang.2017}.
+        \item Deadlock is impossible as tasks cannot preempt each other.
     \end{itemize}
     \item Drawbacks:
     \begin{itemize}
-        \item High-priority tasks may suffer long blocking times (poor responsiveness)
-        \item Not scalable for complex systems with mixed criticality
+        \item High-priority tasks likely to suffer long blocking times (poor responsiveness)
+        \item Higher priority tasks can be blocked by any lower priority task arbitrarily even when the higher priority task does not need the resource.
+        \item Not suitable for time-critical real-time systems.
     \end{itemize}
 \end{itemize}
+This protocol ensures that any higher priority task will be blocked, if needed, at most once~\cite{JiacunWang.2017}. Maximum blocking time is equal to the longest critical section length of all the tasks sharing the resource. This means that the worst case occurs ``right after the lower priority task with the longest critical section enters the critical section''~\cite{JiacunWang.2017}. It downgrades the higher priority task to ready and blocked status. According to~\cite{JiacunWang.2017} also, the maximum blocking time of any periodic task is\\
+\[
+    b_i(\mathrm{rc}) = \max \{ c_k \mid k = i + 1, i + 2, \ldots, n \}
+\]
+where $c_k$ is the longest critical section length of any periodic task $T_k$. For example, a system with four periodic tasks $T_1$, $T_2$, $T_3$, and $T_4$ with decreasin order priorities can be considered here. The critical section lengths of the tasks are 5, 4, 7, and 3 respectively.\\
+\begin{align*}
+\text{Maximum blocking time for } T_1: \quad 
+& b_1(\mathrm{rc}) = \max \{ c_2, c_3, c_4 \} \\
+& = \max \{ 4, 7, 3 \} = 7
+\end{align*}
+\begin{align*}
+\text{Maximum blocking time for } T_2: \quad 
+& b_2(\mathrm{rc}) = \max \{ c_3, c_4 \} \\
+& = \max \{ 7, 3 \} = 7
+\end{align*}
+\begin{align*}
+\text{Maximum blocking time for } T_3: \quad 
+& b_3(\mathrm{rc}) = \max \{ c_4 \} \\
+& = \max \{ 3 \} = 3
+\end{align*}
+Task $T_4$ does not block any other task as it is the lowest priority task. Hence, its maximum blocking time is 0.
+
 \subsection{Priority Inheritance Protocol (PIP)}
-The Priority Inheritance Protocol (PIP) is a classic approach to reduce priority inversion in systems where tasks share mutually exclusive resources (e.g., locks, semaphores). When a low-priority task holds a resource required by a higher-priority task, the low-priority task temporarily inherits the higher priority. This prevents it from being preempted by intermediate-priority tasks, allowing it to finish quickly and release the resource.
+According to this protocol, a lower priority task will block a higher priority task and attain the higher priority temporarily. This way, the lower priority task will be able to execute its critical section as soon as possible~\cite{JiacunWang.2017}. According to~\cite{Buttazzo.2024}, ``This prevents medium-priority tasks from preempting $\tau_i$ and prolonging the blocking duration experienced by the higher-priority tasks'', where $\tau_i$ is a set of periodic tasks. The Priority Inheritance Protocol (PIP) is a classic approach to reduce priority inversion in systems where tasks share mutually exclusive resources (e.g., locks, semaphores). When a low-priority task holds a resource required by a higher-priority task, the low-priority task temporarily inherits the higher priority. This prevents it from being preempted by intermediate-priority tasks, allowing it to finish quickly and release the resource.
 \begin{itemize}
     \item Benefits: 
     \begin{itemize}

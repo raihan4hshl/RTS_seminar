@@ -1,0 +1,2 @@
+﻿  PIP_task_simulation.cpp
+C:\Users\exone\Documents\GitHub\RTS_seminar\PIP_task_simulation\PIP_task_simulation\PIP_task_simulation.cpp(1,10): error C1083: Cannot open include file: 'pthread.h': No such file or directory
