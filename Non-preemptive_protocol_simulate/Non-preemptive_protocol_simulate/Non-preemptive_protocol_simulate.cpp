@@ -10,7 +10,7 @@ private:
 
 public:
     void executeTask(int task_id, int exec_time_ms) {
-        std::lock_guard<std::mutex> lock(scheduler_mutex); // Exclusive execution
+        std::lock_guard<std::mutex> lock(scheduler_mutex); 
 
         std::cout << "Task " << task_id << " STARTED (Non-Preemptive)\n";
         std::this_thread::sleep_for(std::chrono::milliseconds(exec_time_ms));
