@@ -42,46 +42,65 @@ Task $T_4$ does not block any other task as it is the lowest priority task. Henc
 
 \subsection{Priority Inheritance Protocol (PIP)}
 According to this protocol, a lower priority task will block a higher priority task and attain the higher priority temporarily. This way, the lower priority task will be able to execute its critical section as soon as possible~\cite{JiacunWang.2017}. According to~\cite{Buttazzo.2024}, ``This prevents medium-priority tasks from preempting $\tau_i$ and prolonging the blocking duration experienced by the higher-priority tasks'', where $\tau_i$ is a set of periodic tasks. The Priority Inheritance Protocol (PIP) is a classic approach to reduce priority inversion in systems where tasks share mutually exclusive resources (e.g., locks, semaphores). When a low-priority task holds a resource required by a higher-priority task, the low-priority task temporarily inherits the higher priority. This prevents it from being preempted by intermediate-priority tasks, allowing it to finish quickly and release the resource.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.95\columnwidth]{Figures/pip.png}
+    \caption{Schedule of tasks accrding to PIP~\cite{JanReineke.2015}}
+    \label{fig:PIP}
+\end{figure}
+In the figure~\ref{fig:PIP}, we can see the scheduling of five single-shot task according to PIP protocol. 
+    \begin{itemize}
+        \item $T_5$ is released at time 0 and start executing.
+        \item At time 1, $T_5$ locks the resource X that is free. Occupying the resource, $T_5$ starts executing its critical section.
+        \item At time 2, $T_4$ comes in the system. Because, it has the higher priority, it will preempts $T_5$.
+        \item $T_4$ completes its execution at time 3 and at the same time $T_3$ is released and it preempts again $T_5$.
+        \item At time 4, $T_2$ is released and it preempts $T_3$. Both $T_5$ and $T_3$ are waiting now.
+        \item Now, $T_2$ attempts to lock X at time 5 which is held by  $T_5$. So,  $T_2$ gets blocked by  $T_5$ and it inherits  $T_2$`s priority.  $T_5$ starts running causing  $T_2$ and  $T_3$ to wait. 
+        \item  $T_1$ is released at time 6 and starts executing by preempting  $T_5$ because of it`s higher priority. Now, $T_2$ $T_3$ and $T_5$ are waiting.
+        \item  $T_1$ attempts to lock X at time 7 but the lock is denied because  $T_5$ is holding that.  $T_5$ will inherit $T_1$`s priority by blocking it and starts executing.
+        \item $T_5$ completes it`s critical section execution at time 8 and unlocks X. $T_1$ now occupies X. However, $T_5$ still have one unit left to execute.
+        \item $T_1$ complete its critical section at time 9 and unlocks X. It will continue executing as it has the highest priority in the system.
+        \item At time 10, $T_1$ complete the execution. $T_2$ will be granted to lock X. 
+        \item At time 11, $T_2$ locks Y and executes with both X and Y while $T_3$ and $T_5$ are waiting.
+        \item At time 12, $T_2$ unlocks X and Y and continues to execute.
+        \item At time 13, $T_3$ will start executing after $T_2$ finishes execution.
+        \item $T_3$ completes execution and $T_5$ starts.
+        \item $T_5$ completes execution at time 15 and thus all tasks are executed.
+    \end{itemize}
 \begin{itemize}
     \item Benefits: 
     \begin{itemize}
-        \item Reduces unbounded priority inversion
-        \item Easy to implement in most RTOS
+        \item Reduces unbounded priority inversion~\cite{JiacunWang.2017}.
+        \item A task can at most be blocked once by any lower priority task~\cite{JiacunWang.2017}.
+        \item It is easy to implement as PIP is supported by most of the commercial RTOSs~\cite{JiacunWang.2017}.
     \end{itemize}
+    According to ~\cite{JiacunWang.2017}, it was used to solve the famous Mars Pathfinder priority inversion issue in 1997.
     \item Drawbacks:
     \begin{itemize}
-        \item Can cause deadlocks if resource ordering is not handled carefully
-        \item Inheritance must be handled recursively for nested resource requests
+        \item It does not prevent deadlock from happening~\cite{JiacunWang.2017}.
+        \item A task might fail to meet its deadline as according to~\cite{JiacunWang.2017}, it can be blocked by many lower priority tasks-- causing the blocking time to be too long.
     \end{itemize}
 \end{itemize}
 \subsection{Priority Ceiling Protocol (PCP)}
-The Priority Ceiling Protocol (PCP) assigns a ceiling priority to each shared resource — equal to the highest priority of any task that might access it.
-A task can only lock a resource if its priority is higher than the ceiling of any currently locked resource by another task.
-When a task accesses a resource, it inherits the ceiling priority, blocking any higher-priority tasks that could interfere.
+The Priority Ceiling Protocol (PCP) is an improvement of PIP which assigns a ceiling priority to each shared resource--- equal to the highest priority of any task that might access it. A task can only lock a resource if it`s priority is higher than the ceiling value of any currently locked resource by another task.
 \begin{itemize}
     \item Benefits: 
     \begin{itemize}
-        \item Prevents both priority inversion and deadlocks
-        \item Ensures bounded blocking time
+        \item Prevents formation of deadlocks by denying those resource requests that, if granted,may cause deadlock later~\cite{JiacunWang.2017}.
+        \item Eliminates unbounded priority inversion, and also avoids chained blocking~\cite{JiacunWang.2017}.
     \end{itemize}
     \item Drawbacks:
     \begin{itemize}
-        \item Requires knowledge of all task/resource relationships at design time
-        \item Can be overly restrictive in dynamic systems
+        \item It entails overhead of the calculation of resource priority ceiling and system priority ceiling, and the overhead of extra context switches due to priority ceiling blockings~\cite{JiacunWang.2017}.
+        \item Eventually, a ``task that does not need to access resources may suffer at most two context switches due to preemption. A task that accesses resource may suffer additional two context switches incurred by blockings''~\cite{JiacunWang.2017}.
     \end{itemize}
 \end{itemize}
 \subsection{Stack Resource Policy (SRP)}
-The Stack Resource Policy (SRP) is used with preemptive scheduling (like EDF or RM) and assumes a single stack for all tasks.
-Each resource has a ceiling, and a task can only preempt the current task if its priority is higher than the system ceiling (i.e., the ceiling of all currently locked resources).
+The Stack Resource Policy (SRP) is a policy which provides stack sharing capacity and simplifies the priority ceiling protocol~\cite{JiacunWang.2017}. The worst-case blocking time of a task is same as PCP under this protocol but this protocol incurs smaller overhead of context switches compared to the priority ceiling protocol~\cite{JiacunWang.2017}. 
 \begin{itemize}
     \item Benefits: 
     \begin{itemize}
-        \item No runtime deadlocks
-        \item Bounded blocking time
-    \end{itemize}
-    \item Drawbacks:
-    \begin{itemize}
-        \item Works best with static task sets
-        \item More complex to analyze than PIP
+        \item No unbounded priority inversion~\cite{JiacunWang.2017}.
+        \item No deadlock and no chained blocking~\cite{JiacunWang.2017}.
     \end{itemize}
 \end{itemize}
